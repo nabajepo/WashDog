@@ -1,9 +1,9 @@
-# WashDog 🐶 – Personal Session Guard (Python)
+# Sentinel 🛡️ – Personal Session Guard (Python)
 
-WashDog is a small security tool that helps you monitor **who is using your own computer**.
+Sentinel is a small security tool that helps you monitor **who is using your own computer**.
 
 The first version focuses on a simple scenario:  
-if someone uses your machine and it is **not you**, WashDog will:
+if someone uses your machine and they are **not you**, Sentinel will:
 
 - capture a picture of the person using the device (via webcam),
 - record a summary of the session activity (e.g., active windows, timestamps),
@@ -38,53 +38,56 @@ to protect your **own devices** in case of theft or unauthorized access, **not**
 - OS-specific modules: separate implementations for **Windows** and **macOS**
 - Notifications: **SMTP email** (configurable)
 
-⚠️ **Legal & ethical note:**  
-Use WashDog **only on devices that you own or administer** and always respect local laws and privacy rules.
+**Legal & ethical note:**  
+Use Sentinel **only on devices that you own or administer** and always respect local laws and privacy rules.
+
+# Project - tree
+sentinel/
+├─ README.md # Sentinel 🛡️ – Personal Session Guard (Python)
+│ # Sentinel helps you monitor who is using your own computer.
+│ # v1 focuses on detecting a non-owner session, capturing a picture,
+│ # logging session activity, and sending an email notification.
+│ # Goal: Educational & defensive, not intended for spying.
+│
+├─ LICENSE # Legal license for open-source usage (optional but recommended)
+├─ .gitignore # Ignore build artifacts, env, logs, etc.
+├─ requirements.txt # Python dependencies (OpenCV, emails, OS libs, etc.)
+├─ .env.example # Example mail config (SMTP settings, sender, etc.)
+│
+├─ sentinel/ # Main Python package
+│ ├─ init.py
+│ ├─ config.py # Loads configuration (email settings, owner identity, paths, etc.)
+│ │
+│ ├─ core/ # Cross-platform logic (OS-independent)
+│ │ ├─ init.py
+│ │ ├─ detector.py # Basic "non-owner" session detection
+│ │ ├─ session_logger.py # Records what happens during the session (active windows, timestamps)
+│ │ ├─ notifier.py # Sends email notifications with evidence attached
+│ │ └─ models.py # Simple data models (SessionInfo, Evidence, Event)
+│ │
+│ ├─ os_windows/ # Windows-specific implementation
+│ │ ├─ init.py
+│ │ ├─ system_api.py # Webcam capture, current user, foreground window, etc.
+│ │ └─ service.py # Auto-start integration (Task Scheduler / Service)
+│ │
+│ ├─ os_macos/ # macOS-specific implementation
+│ │ ├─ init.py
+│ │ ├─ system_api.py # Webcam capture, current user, window title, etc.
+│ │ └─ service.py # Auto-start integration via launchd
+│ │
+│ └─ cli/
+│ ├─ init.py
+│ └─ main.py # Entry point: launches detection + notification logic
+│
+├─ docs/ # Documentation for contributors and users
+│ ├─ architecture.md # Description of core architecture + OS separation
+│ ├─ setup_windows.md # How to install and run Sentinel on Windows
+│ └─ setup_macos.md # How to install and run Sentinel on macOS
+│
+└─ tests/ # Unit tests (for core components only)
+├─ init.py
+├─ test_detector.py # Tests for "non-owner" session detection logic
+└─ test_notifier.py # Tests email notification behavior
 
 # Project - Tree
-washdog/
-├─ README.md                        # WashDog 🐶 – Personal Session Guard (Python)
-│                                   # WashDog helps you monitor who is using your own computer.
-│                                   # v1 focuses on detecting a non-owner session, capturing a picture,
-│                                   # logging session activity, and sending an email notification.
-│                                   # Goal: Educational & defensive, not intended for spying.
-│
-├─ LICENSE                          # Legal license for open-source usage (optional but recommended)
-├─ .gitignore                       # Ignore build artifacts, env, logs, etc.
-├─ requirements.txt                 # Python dependencies (OpenCV, emails, OS libs, etc.)
-├─ .env.example                     # Example mail config (SMTP settings, sender, etc.)
-│
-├─ washdog/                         # Main Python package
-│  ├─ __init__.py
-│  ├─ config.py                     # Loads configuration (email settings, owner identity, paths, etc.)
-│  │
-│  ├─ core/                         # Cross-platform logic (OS-independent)
-│  │  ├─ __init__.py
-│  │  ├─ detector.py                # Basic "non-owner" session detection
-│  │  ├─ session_logger.py          # Records what happens during the session (active windows, timestamps)
-│  │  ├─ notifier.py                # Sends email notifications with evidence attached
-│  │  └─ models.py                  # Simple data models (SessionInfo, Evidence, Event)
-│  │
-│  ├─ os_windows/                   # Windows-specific implementation
-│  │  ├─ __init__.py
-│  │  ├─ system_api.py              # Webcam capture, current user, foreground window, etc.
-│  │  └─ service.py                 # Auto-start integration (Task Scheduler / Service)
-│  │
-│  ├─ os_macos/                     # macOS-specific implementation
-│  │  ├─ __init__.py
-│  │  ├─ system_api.py              # Webcam capture, current user, window title, etc.
-│  │  └─ service.py                 # Auto-start integration via launchd
-│  │
-│  └─ cli/
-│     ├─ __init__.py
-│     └─ main.py                    # Entry point: launches detection + notification logic
-│
-├─ docs/                            # Documentation for contributors and users
-│  ├─ architecture.md               # Description of core architecture + OS separation
-│  ├─ setup_windows.md              # How to install and run WashDog on Windows
-│  └─ setup_macos.md                # How to install and run WashDog on macOS
-│
-└─ tests/                           # Unit tests (for core components only)
-   ├─ __init__.py
-   ├─ test_detector.py              # Tests for "non-owner" session detection logic
-   └─ test_notifier.py              # Tests email notification behavior
+
