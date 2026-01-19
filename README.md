@@ -41,7 +41,7 @@ to protect your **own devices** in case of theft or unauthorized access, **not**
 ⚠️ **Legal & ethical note:**  
 Use WashDog **only on devices that you own or administer** and always respect local laws and privacy rules.
 
-# PROJECT-TREE
+# Project - Tree
 washdog/
 ├─ README.md                        # WashDog 🐶 – Personal Session Guard (Python)
 │                                   # WashDog helps you monitor who is using your own computer.
@@ -88,4 +88,3 @@ washdog/
    ├─ __init__.py
    ├─ test_detector.py              # Tests for "non-owner" session detection logic
    └─ test_notifier.py              # Tests email notification behavior
-
